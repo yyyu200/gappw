@@ -1,6 +1,11 @@
 # gappw
 
+```
 gappw.sh [ -n -c -h ] FILENAME
+-n : noncollinear format
+-c : collinear format
+-h : show this message
+```
 
 Usage: Find band gaps from pw.x(Quantum Espresso) output file.
 
@@ -12,9 +17,7 @@ For semiconductors and insulators only, should include empty bands, use
 run as:
 ```
  $./gappw.sh pw.out
--n : noncollinear format
--c : collinear format
--h : show this message
+
 ```
 
 N.B. spin-polarized not implement
