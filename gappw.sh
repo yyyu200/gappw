@@ -58,8 +58,8 @@ NBD=`grep "number of Kohn-Sham states=" $file_in|head -1|awk '{print $5}'`
 
 NTYP=`grep "number of atomic types    =" $file_in|head -1|awk '{print $6}'`
 
-IZVAL=(`grep -A $NTYP "atomic species   valence" $file_in |tail -$NTYP|awk '{printf("%lf ", $2)}'`)
-ELEM=(`grep -A $NTYP "atomic species   valence" $file_in |tail -$NTYP|awk '{printf("%s ", $1)}'`)
+IZVAL=$(awk 'BEGIN{c='"$NTYP"'}/atomic species   valence/{for(i=0;i<c;i++){getline;print $2}}' $file_in)
+ELEM=$(awk 'BEGIN{c='"$NTYP"'}/atomic species   valence/{for(i=0;i<c;i++){getline;print $1}}' $file_in)
 
 NAT=`grep "number of atoms/cell      =" $file_in|head -1|awk '{print $5}'`
 
