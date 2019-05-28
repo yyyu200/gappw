@@ -57,6 +57,7 @@ fi
 NBD=`grep "number of Kohn-Sham states=" $file_in|head -1|awk '{print $5}'`
 
 NTYP=`grep "number of atomic types    =" $file_in|head -1|awk '{print $6}'`
+#NTYP=$(awk '/number of atomic types    =/{print $6}' $file_in|head -1)
 
 IZVAL=$(awk 'BEGIN{c='"$NTYP"'}/atomic species   valence/{for(i=0;i<c;i++){getline;print $2}}' $file_in)
 ELEM=$(awk 'BEGIN{c='"$NTYP"'}/atomic species   valence/{for(i=0;i<c;i++){getline;print $1}}' $file_in)
@@ -70,7 +71,7 @@ echo "number of valence electron = " ${IZVAL[@]}
 echo "number of atoms = " $NAT
 echo "atomic species = " ${ELEM[@]}
 
-NVBM=(`awk -v var1="${ELEM[*]}" -v var2="${IZVAL[*]}" -v flag_noncol="${flag_noncol}" 'BEGIN{
+NVBM=`awk -v var1="${ELEM[*]}" -v var2="${IZVAL[*]}" -v flag_noncol="${flag_noncol}" 'BEGIN{
     nat='"$NAT"'
     lens=split(var1,elem," ")
     split(var2,izval," ")
@@ -103,14 +104,16 @@ END{
         print nvbm
     else
         print nvbm/2
-}' $file_in`)
+}' $file_in`
 
 #echo "number of each species = " ${IELEM[@]}
 
-echo "vbm =  "$NVBM
-if [ $NVBM -gt $NBD ];then
+
+if [[ $NVBM > $NBD ]];then
     echo "ERROR: vbm < nbnd"
     exit 0
+else
+    echo "valence band= $NVBM <= total band= $NBD"
 fi
 
 awk 'BEGIN{
@@ -150,8 +153,9 @@ END{
         if(i%nkpt==0) print ""
     }
 }
-' $file_in > VBMCBM
-echo "written to VBMCBM"
+' $file_in > /tmp/VBMCBM
+
+echo "written to /tmp/VBMCBM"
 
 awk 'BEGIN{
     getline
@@ -179,8 +183,8 @@ awk 'BEGIN{
         }
         getline
         print "vbm_k= " vi  " cbm_k= " ci
-        print "vbm= " vmax " cbm= " cmin " Eg= " cmin-vmax
+        print "E(vbm)= " vmax " E(cbm)= " cmin " Eg= " cmin-vmax
     }
 }
-' VBMCBM
+' /tmp/VBMCBM
 
