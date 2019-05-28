@@ -20,7 +20,7 @@ run as:
 
 ```
 
-N.B. spin-polarized not implement; more accurate gap should get more digits from outdir. 
+N.B. set verbosity='high' in scf calculation for No. of k-points > 100; spin-polarized not implement; more accurate gap should get more digits from outdir. 
 
 Sample output:
 ```
