@@ -36,6 +36,10 @@ done
 
 shift $(($OPTIND -1))
 file_in=$1
+tmp_file=/tmp/VBMCBM_$RANDOM
+while [[ -e $tmp_file ]];do
+    tmp_file=/tmp/VBMCBM_$RANDOM
+done
 
 if [ $# -eq 1 ];then
     if [ -e $1 ];then
@@ -153,9 +157,9 @@ END{
         if(i%nkpt==0) print ""
     }
 }
-' $file_in > /tmp/VBMCBM
+' $file_in > $tmp_file
 
-echo "written to /tmp/VBMCBM"
+echo "written to $tmp_file"
 
 awk 'BEGIN{
     getline
@@ -186,5 +190,5 @@ awk 'BEGIN{
         print "E(vbm)= " vmax " E(cbm)= " cmin " Eg= " cmin-vmax
     }
 }
-' /tmp/VBMCBM
+' $tmp_file
 
