@@ -28,16 +28,19 @@ reading relax.out
 number of k-piont  = 48
 number of band =  31
 number of atomic type =  2
-number of valence electron =  20.000000 6.000000
+number of valence electron =  20.00 6.00
 number of atoms =  4
 atomic species =  Zn O
-vbm =  26
-written to VBMCBM
+valence band= 26 <= total band= 31
+written to /tmp/VBMCBM_26727
 vbm_k= 1 cbm_k= 1
-vbm= 10.1849 cbm= 11.0124 Eg= 0.8275
+E(vbm)= 10.1849 E(cbm)= 11.0124 Eg= 0.8275
 vbm_k= 1 cbm_k= 1
-vbm= 10.1827 cbm= 11.0125 Eg= 0.8298
+E(vbm)= 10.1827 E(cbm)= 11.0125 Eg= 0.8298
 vbm_k= 1 cbm_k= 1
-vbm= 10.1797 cbm= 11.0142 Eg= 0.8345
-
+E(vbm)= 10.1797 E(cbm)= 11.0142 Eg= 0.8345
+vbm_k= 1 cbm_k= 1
+E(vbm)= 10.1852 E(cbm)= 11.0190 Eg= 0.8338
+vbm_k= 1 cbm_k= 1
+E(vbm)= 10.1839 E(cbm)= 11.0177 Eg= 0.8338
 ```
