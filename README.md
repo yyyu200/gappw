@@ -20,7 +20,7 @@ run as:
 
 ```
 
-N.B. spin-polarized not implement
+N.B. spin-polarized not implement; more accurate gap should get more digits from outdir. 
 
 Sample output:
 ```
