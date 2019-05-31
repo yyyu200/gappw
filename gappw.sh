@@ -63,8 +63,8 @@ NBD=`grep "number of Kohn-Sham states=" $file_in|head -1|awk '{print $5}'`
 NTYP=`grep "number of atomic types    =" $file_in|head -1|awk '{print $6}'`
 #NTYP=$(awk '/number of atomic types    =/{print $6}' $file_in|head -1)
 
-IZVAL=$(awk 'BEGIN{c='"$NTYP"'}/atomic species   valence/{for(i=0;i<c;i++){getline;print $2}}' $file_in)
-ELEM=$(awk 'BEGIN{c='"$NTYP"'}/atomic species   valence/{for(i=0;i<c;i++){getline;print $1}}' $file_in)
+IZVAL=$(awk 'BEGIN{c='"$NTYP"';flag=0}/atomic species   valence/{flag++;if(flag==1)for(i=0;i<c;i++){getline;print $2}}' $file_in)
+ELEM=$(awk 'BEGIN{c='"$NTYP"';flag=0}/atomic species   valence/{flag++;if(flag==1)for(i=0;i<c;i++){getline;print $1}}' $file_in)
 
 NAT=`grep "number of atoms/cell      =" $file_in|head -1|awk '{print $5}'`
 
@@ -113,11 +113,13 @@ END{
 #echo "number of each species = " ${IELEM[@]}
 
 
-if [[ $NVBM > $NBD ]];then
-    echo "ERROR: vbm < nbnd"
+if [[ $NVBM -ge $NBD ]];then
+    echo "NVBM= $NVBM, NBND= $NBD"
+    echo "ERROR: vbm >= nbnd"
     exit 0
 else
-    echo "valence band= $NVBM <= total band= $NBD"
+    echo "valence band = $NVBM"
+    echo "total band = $NBD"
 fi
 
 awk 'BEGIN{
