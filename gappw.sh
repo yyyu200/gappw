@@ -107,7 +107,7 @@ END{
     if (flag_noncol==1)
         print nvbm
     else
-        print nvbm/2
+        print int(nvbm/2)
 }' $file_in`
 
 #echo "number of each species = " ${IELEM[@]}
