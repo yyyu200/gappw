@@ -44,3 +44,14 @@ E(vbm)= 10.1852 E(cbm)= 11.0190 Eg= 0.8338
 vbm_k= 1 cbm_k= 1
 E(vbm)= 10.1839 E(cbm)= 11.0177 Eg= 0.8338
 ```
+
+
+##############################################################################
+# This program could be rewritten in C or Golang for faster performance.
+# Or it could be rewritten in Python or another higher level language
+# for more modularity.
+# However, I've insisted on shell here for transparency!
+#                                                                     - Y.Z
+##############################################################################
+
+
