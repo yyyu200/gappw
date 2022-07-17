@@ -94,6 +94,10 @@ if [ ! -z "$flag_noncol_non_SOC" ];then
     echo "calculation noncollinear, without spin-orbit"
 fi
 
+if [[ $flag_noncol -eq "0" ]];then
+    echo "calculation without spin-orbit"
+fi
+
 NVBM=`awk -v var1="${ELEM[*]}" -v var2="${IZVAL[*]}" -v flag_noncol="${flag_noncol}" 'BEGIN{
     nat='"$NAT"'
     lens=split(var1,elem," ")
