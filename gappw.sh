@@ -75,6 +75,25 @@ echo "number of valence electron = " ${IZVAL[@]}
 echo "number of atoms = " $NAT
 echo "atomic species = " ${ELEM[@]}
 
+flag_SOC_non_mag=`grep 'Non magnetic calculation with spin-orbit' $file_in`
+flag_SOC_mag=`grep 'Noncollinear calculation with spin-orbit' $file_in`
+flag_noncol_non_SOC=`grep 'Noncollinear calculation without spin-orbit' $file_in`
+
+if [ ! -z "$flag_SOC_non_mag" ];then
+    flag_noncol=1
+    echo "calculation with spin-orbit, non-magnetic"
+fi
+
+if [ ! -z "$flag_SOC_mag" ];then
+    flag_noncol=1
+    echo "calculation with spin-orbit, magnetic"
+fi
+
+if [ ! -z "$flag_noncol_non_SOC" ];then
+    flag_noncol=0
+    echo "calculation noncollinear, without spin-orbit"
+fi
+
 NVBM=`awk -v var1="${ELEM[*]}" -v var2="${IZVAL[*]}" -v flag_noncol="${flag_noncol}" 'BEGIN{
     nat='"$NAT"'
     lens=split(var1,elem," ")
